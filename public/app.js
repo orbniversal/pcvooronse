@@ -70,7 +70,6 @@ menu_onderdelen.forEach(onderdeel => {
       submenu.classList.add(window.app.submenu_open);
     });
   } else {
-    // Voor menu onderdelen zonder submenu: sluit alle open submenu's
     menu_onderdeel.addEventListener('mouseenter', () => {
       if (open_Submenu) {
         open_Submenu.classList.remove(window.app.submenu_open);
