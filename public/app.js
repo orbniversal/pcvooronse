@@ -1,98 +1,129 @@
-document.body.className = window.app.body;
+document.body.className = window.app.pagina;
 const box = document.createElement('div');
 box.className = window.app.box;
-const abovebar = document.createElement('div');
-abovebar.className = window.app.abovebar;
-const clock = document.createElement('div');
-clock.className = window.app.clock;
-function updateClock() {
+const balk = document.createElement('div');
+balk.className = window.app.balk;
+
+const menu = document.createElement('button');
+menu.className = window.app.menu;
+const menu_icoon = document.createElement('img');
+menu_icoon.src = './favicon.ico';
+menu_icoon.alt = 'Explore';
+menu.appendChild(menu_icoon);
+
+const menu_box = document.createElement('div');
+menu_box.className = window.app.menu_box;
+
+const menu_onderdelen = [
+  {
+    naam: 'Business',
+    submenu: ['Gegevens', 'Ervaringen', 'Gereedschappen']
+  },
+  {
+    naam: 'Donatie\'s',
+    submenu: []
+  },
+  {
+    naam: 'Eigenaar',
+    submenu: ['Gegevens', 'Studie\'s']
+  },
+  {
+    naam: 'Documentatie',
+    submenu: ['Rondleiding', 'Kennisen', 'Diensten']
+  }
+];
+
+let open_Submenu = null;
+
+menu_onderdelen.forEach(onderdeel => {
+  const menu_onderdeel = document.createElement('div');
+  menu_onderdeel.className = window.app.menu_onderdeel;
+
+  const menu_naam = document.createElement('span');
+  menu_naam.className = window.app.menu_naam;
+  menu_naam.textContent = onderdeel.naam;
+  menu_onderdeel.appendChild(menu_naam);
+
+  if (onderdeel.submenu.length > 0) {
+    const menu_pijltje = document.createElement('span');
+    menu_pijltje.className = window.app.menu_pijltje;
+    menu_pijltje.textContent = '▶';
+    menu_onderdeel.appendChild(menu_pijltje);
+
+    const submenu = document.createElement('div');
+    submenu.className = window.app.submenu;
+
+    onderdeel.submenu.forEach(sub_onderdeel => {
+      const sub_menu_onderdeel = document.createElement('div');
+      sub_menu_onderdeel.className = window.app.sub_menu_onderdeel;
+      sub_menu_onderdeel.textContent = sub_onderdeel;
+      submenu.appendChild(sub_menu_onderdeel);
+    });
+
+    menu_onderdeel.appendChild(submenu);
+
+    menu_onderdeel.addEventListener('mouseenter', () => {
+      if (open_Submenu && open_Submenu !== submenu) {
+        open_Submenu.classList.remove(window.app.submenu_open);
+      }
+      open_Submenu = submenu;
+      submenu.classList.add(window.app.submenu_open);
+    });
+  } else {
+    // Voor menu onderdelen zonder submenu: sluit alle open submenu's
+    menu_onderdeel.addEventListener('mouseenter', () => {
+      if (open_Submenu) {
+        open_Submenu.classList.remove(window.app.submenu_open);
+        open_Submenu = null;
+      }
+    });
+  }
+
+  menu_box.appendChild(menu_onderdeel);
+});
+
+const klok = document.createElement('div');
+klok.className = window.app.klok;
+function Klok_functie() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
-  clock.textContent = `${hours}:${minutes}:${seconds}`;
-}
-abovebar.appendChild(clock);
-box.appendChild(abovebar);
-
-const content = document.createElement('div');
-content.className = window.app.content;
-
-const navigation = document.createElement('div');
-navigation.className = window.app.navigation
-
-const sections = {
-  over: 'Wie ben ik?',
-  ervaringen: 'Mijn ervaringen',
-  services: 'Wat bied ik aan?', 
-  contact: 'Neem contact en stel je vraag',
-  forum: 'Forum'
-};
-
-Object.entries(sections).forEach(([id, text]) => {
-  const _button = document.createElement('button');
-  _button.className = window.app.navigation_button;
-  _button.textContent = text;
-  _button.onclick = () => show_section(id);
-  navigation.appendChild(_button);
-});
-
-const sections_box = document.createElement('div');
-sections_box.style.minHeight = '200px';
-
-function show_section(id) {
-  sections_box.innerHTML = '';
-  const section = document.createElement('div');
-  
-  switch(id) {
-    case 'over':
-      section.innerHTML = `<h2>Wie ben ik?</h2>
-      <p>Naam: Thienpont kevin</p>
-      <p>Geboortedatum: 26/07/1993</p>
-      <p>Kennis: Basis Windows en Android</p>
-      <p>Gereedschap:</p>
-      <ul><li>Meer dan 5 computers en 2 smartphones.</li>
-      <li>AI Assistent ( Robot met heel veel kennis ).</li>
-      <li>Toegang tot de meest recente Windows 11 installatie bestanden.</li></ul>`;
-      break;
-    case 'services':
-      section.innerHTML = `<h2>Wat bied ik aan?</h2>
-      <ul><li> Tips, adviesen & uitleg.</li>
-      <li> Organisering en opruimingen.</li>
-      <li> Een proper Windows installatie.</li>
-      <li> Ik kom aan huis bij een afspraak en ga aan de slag.</li></ul>`;
-      break;
-    case 'ervaringen':
-      section.innerHTML = `<h2>Mijn ervaringen</h2>
-      <p>Sinds de jaren 2000 stapelgek van computers.</p>
-      <p>Er is geen dag waar ik daar niet mee bezig ben.</p>
-      <p>Alles is zelf aangeleerd & heb gevoel voor coderen.</p>
-      <p>Ik kan programma's aanmaken met functie's naar je wens.</p>
-      <p>Ik heb weinig kennis in de hardware gedeelte van computers.</p>`;
-      break;
-    case 'contact':
-      section.innerHTML = `<h2>Contact</h2>
-        <p>Email: orbniversal@gmail.com</p>
-        <p>Gsm: +32 460/943/907</p>`;
-      break;
-    case 'forum':
-      section.innerHTML = `<h2>Forum</h2>
-      <p>Meld je aan & deel problemen en oplossingen met anderen.</p>
-      <p>Niks is beter dan eens vragen aan andere mensen</p>
-      <p>via bericht of video gesprek voor een oplossing naar een probleem</p>
-      <p>of gewoon eens een babbel doen over computers & smartphones</p>
-      <p>als ik afwezig ben.</p>`;
-      break;
-  }
-  
-  sections_box.appendChild(section);
+  klok.textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-content.appendChild(navigation);
-content.appendChild(sections_box);
-box.appendChild(content);
+balk.appendChild(menu);
+balk.appendChild(klok);
+box.appendChild(balk);
+box.appendChild(menu_box);
 document.body.appendChild(box);
 
-show_section('over');
-updateClock();
-setInterval(updateClock, 1000);
+let menu_open = false;
+menu.addEventListener('click', () => {
+  menu_open = !menu_open;
+  if (menu_open) {
+    menu_box.style.display = 'block';
+    setTimeout(() => menu_box.classList.add(window.app.show), 10);
+  } else {
+    menu_box.classList.remove(window.app.show);
+    if (open_Submenu) {
+      open_Submenu.classList.remove(window.app.submenu_open);
+      open_Submenu = null;
+    }
+    setTimeout(() => menu_box.style.display = 'none', 300);
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!menu.contains(e.target) && !menu_box.contains(e.target)) {
+    menu_open = false;
+    menu_box.classList.remove(window.app.show);
+    if (open_Submenu) {
+      open_Submenu.classList.remove(window.app.submenu_open);
+      open_Submenu = null;
+    }
+    setTimeout(() => menu_box.style.display = 'none', 300);
+  }
+});
+Klok_functie();
+setInterval(Klok_functie, 1000);
