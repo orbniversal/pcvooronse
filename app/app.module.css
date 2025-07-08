@@ -56,8 +56,8 @@
 }
 
 .menu_box {
-  top: 60px;
-  left: 15px;
+  top: 70px;
+  left: 20px;
   opacity: 0;
   width: 200px;
   display: none;
@@ -65,9 +65,8 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   transform: translateY(-10px);
+  box-shadow: 0 0 0 1px white;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -89,6 +88,7 @@
   border-radius: 7.5px;
   justify-content: space-between;
   transition: background 0.2s ease;
+
 }
 
 .menu_onderdeel:hover {
@@ -126,9 +126,8 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   transform: translateX(-10px);
+  box-shadow: 0 0 0 1px white;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -162,33 +161,33 @@
     left: 10px;
     width: 160px;
   }
-  
+
   .menu_onderdeel {
     margin: 2.5px;
     padding: 10px;
     font-size: 13px;
   }
-  
+
   .submenu {
     left: 170px;
     width: 140px;
   }
-  
+
   .sub_menu_onderdeel {
     padding: 10px;
     margin: 2.5px;
     font-size: 12px;
   }
-  
+
   .klok {
     font-size: 16px;
   }
-  
+
   .menu {
     width: 28px;
     height: 28px;
   }
-  
+
   .menu img {
     width: 18px;
     height: 18px;
