@@ -17,23 +17,19 @@
   const menu_box = document.createElement('div');
   menu_box.className = window.app.menu_box;
 
-  const menu_onderdelen = [
-    {
-      naam: 'Welkom',
-      submenu: []
-    }, {
-      naam: 'Donaties',
-      submenu: []
-    }, {
-      naam: 'Eigenaar',
-      submenu: ['Studies', 'Gegevens']
-    }, {
-      naam: 'Organisatie',
-      submenu: ['Gegevens', 'Ervaringen', 'Gereedschappen']
-    }, {
-      naam: 'Documentatie',
-      submenu: ['Diensten', 'Kennissen', 'Rondleiding']
-    }
+  const menu_onderdelen = [{
+    naam: 'Donaties',
+    submenu: []
+  }, {
+    naam: 'Eigenaar',
+    submenu: ['Studies', 'Gegevens']
+  }, {
+    naam: 'Organisatie',
+    submenu: ['Gegevens', 'Ervaringen', 'Gereedschappen']
+  }, {
+    naam: 'Documentatie',
+    submenu: ['Diensten', 'Kennissen', 'Rondleiding']
+  }
   ];
 
   let open_Submenu = null;
@@ -154,6 +150,6 @@
   });
   Klok_functie();
   setInterval(Klok_functie, 1000);
-  const welkom_module = '/window/welkom.js';
-  await open_menu(welkom_module);
+  const home_module = '/window/home.js';
+  await open_menu(home_module);
 })();
